@@ -3,7 +3,7 @@ const validator=require("validator");
 
 const invoiceSchema=new mongoose.Schema({
     hoursofwork:{
-        type:String,
+        type:Number,
         require:true
     },
     rate:{
@@ -20,7 +20,7 @@ const invoiceSchema=new mongoose.Schema({
             require:true
         },
         chequeDetails:{
-            type:String,
+            type:Date,
             require:true
         }
     },
@@ -29,8 +29,18 @@ const invoiceSchema=new mongoose.Schema({
         require:true
     },
     paidStatus:{
-        type:Number,
+        type:String,
         require:true
+    },
+    email:{
+        type:String,
+        required:[true,"Email is Necessary"],
+        unique:[true,"Email Should be unique"],
+        validate(value){
+            if(!validator.isEmail(value)){
+                throw new Error("Invalid Email");
+            }
+        }
     },
     dueDate:{
         type:Date,

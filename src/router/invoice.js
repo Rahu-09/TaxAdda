@@ -24,6 +24,7 @@ router.get("/invoice/:id", async (req, res) => {
             return res.status(404).send();
         }
         let paidStatus=result.paidStatus;
+        let email=result.email;
         main(email, paidStatus).then(() => {
             console.log("Completely invoices status detail sent")
         }
@@ -44,16 +45,16 @@ async function main(email, paidStatus) {
         port: 587,
         secure: false,
         auth: {
-            user: "ar7365801709@gmail.com",
+            user: "ak7365801709@gmail.com",
             pass: "Rahul@123"
-        },
+        }
         // tls: {
         //     rejectUnauthorized: false
         // }
     });
 
     let info = await transporter.sendMail({
-        from: '<ar7365801709@gmail.com>', // sender address
+        from: '<ak7365801709@gmail.com>', // sender address
         to: email, // list of receivers
         subject: "View invoices status", // Subject line
         text: "Your status is :-" + paidStatus, // plain text body
